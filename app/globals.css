@@ -1,0 +1,475 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Epic gaming scrollbar with ornate design */
+  ::-webkit-scrollbar {
+    width: 14px;
+    height: 14px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(20, 10, 0, 0.9) 100%);
+    border-radius: 8px;
+    border: 2px solid rgba(234, 179, 8, 0.2);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #eab308 0%, #f59e0b 50%, #d97706 100%);
+    border-radius: 8px;
+    border: 2px solid rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 10px rgba(234, 179, 8, 0.5), inset 0 0 5px rgba(255, 255, 255, 0.3);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #f59e0b 0%, #d97706 50%, #b45309 100%);
+    box-shadow: 0 0 15px rgba(234, 179, 8, 0.8), inset 0 0 8px rgba(255, 255, 255, 0.4);
+  }
+
+  /* Firefox scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #eab308 rgba(0, 0, 0, 0.9);
+  }
+
+  /* Epic anime-style animations inspired by gaming */
+  @keyframes epicSlideIn {
+    from {
+      opacity: 0;
+      transform: translateX(-100px) scale(0.8);
+      filter: blur(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+      filter: blur(0);
+    }
+  }
+
+  @keyframes epicFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(50px) scale(0.9);
+      filter: blur(5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+  }
+
+  @keyframes runicGlow {
+    0%,
+    100% {
+      text-shadow: 0 0 10px rgba(234, 179, 8, 0.5), 0 0 20px rgba(234, 179, 8, 0.3), 0 0 30px rgba(234, 179, 8, 0.2);
+    }
+    50% {
+      text-shadow: 0 0 20px rgba(234, 179, 8, 0.8), 0 0 30px rgba(234, 179, 8, 0.5), 0 0 40px rgba(234, 179, 8, 0.3);
+    }
+  }
+
+  @keyframes particleFloat {
+    0% {
+      transform: translateY(0) translateX(0) scale(1);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-100px) translateX(20px) scale(0);
+      opacity: 0;
+    }
+  }
+
+  @keyframes soulAbsorb {
+    0% {
+      transform: scale(0) rotate(0deg);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1.5) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes speedLines {
+    from {
+      transform: translateX(0) scaleX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(100px) scaleX(1);
+      opacity: 0;
+    }
+  }
+
+  @keyframes ornateReveal {
+    from {
+      clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+      opacity: 0;
+    }
+    to {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      opacity: 1;
+    }
+  }
+
+  @keyframes powerPulse {
+    0%,
+    100% {
+      box-shadow: 0 0 20px rgba(234, 179, 8, 0.3), 0 0 40px rgba(234, 179, 8, 0.2), inset 0 0 20px
+        rgba(234, 179, 8, 0.1);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(234, 179, 8, 0.6), 0 0 60px rgba(234, 179, 8, 0.4), inset 0 0 30px
+        rgba(234, 179, 8, 0.2);
+    }
+  }
+
+  @keyframes sandFlow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Adding anime-inspired animations */
+  @keyframes animeFloat {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes animeSparkle {
+    0%,
+    100% {
+      transform: scale(1) rotate(0deg);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.2) rotate(180deg);
+      opacity: 0.8;
+    }
+  }
+
+  @keyframes animePulse {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.9;
+    }
+  }
+
+  @keyframes animeGlow {
+    0%,
+    100% {
+      box-shadow: 0 0 20px rgba(234, 179, 8, 0.5), 0 0 40px rgba(234, 179, 8, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(234, 179, 8, 0.8), 0 0 60px rgba(234, 179, 8, 0.5);
+    }
+  }
+
+  @keyframes speedLine {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    to {
+      transform: translateX(200%);
+      opacity: 0;
+    }
+  }
+
+  @keyframes animeParticle {
+    0% {
+      transform: translateY(0) scale(0);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-200px) scale(1);
+      opacity: 0;
+    }
+  }
+
+  @keyframes animeFadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes animeScaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.5) rotate(-10deg);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+  }
+
+  @keyframes animeSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .epic-slide-in {
+    animation: epicSlideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .epic-fade-in {
+    animation: epicFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .runic-glow {
+    animation: runicGlow 2s ease-in-out infinite;
+  }
+
+  .power-pulse {
+    animation: powerPulse 2s ease-in-out infinite;
+  }
+
+  .ornate-reveal {
+    animation: ornateReveal 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .anime-float {
+    animation: animeFloat 3s ease-in-out infinite;
+  }
+
+  .anime-sparkle {
+    animation: animeSparkle 2s ease-in-out infinite;
+  }
+
+  .anime-pulse {
+    animation: animePulse 2s ease-in-out infinite;
+  }
+
+  .anime-glow {
+    animation: animeGlow 2s ease-in-out infinite;
+  }
+
+  .anime-particle {
+    animation: animeParticle 4s ease-out infinite;
+  }
+
+  .anime-fade-in {
+    animation: animeFadeIn 0.5s ease-out;
+  }
+
+  .anime-scale-in {
+    animation: animeScaleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .anime-slide-up {
+    animation: animeSlideUp 0.5s ease-out;
+  }
+
+  /* Ornate border patterns inspired by Prince of Persia */
+  .ornate-border {
+    position: relative;
+    border: 2px solid transparent;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(20, 10, 0, 0.8)) padding-box,
+      linear-gradient(135deg, #eab308, #f59e0b, #d97706, #eab308) border-box;
+  }
+
+  .ornate-border::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, #eab308, #f59e0b, #d97706, #eab308);
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: -1;
+    filter: blur(10px);
+  }
+
+  .ornate-border:hover::before {
+    opacity: 0.5;
+  }
+
+  /* Runic symbol decorations */
+  .runic-accent::before {
+    content: "⚔";
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+    color: #eab308;
+    text-shadow: 0 0 10px rgba(234, 179, 8, 0.8);
+  }
+
+  /* Speed lines effect for anime feel */
+  .speed-lines {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .speed-lines::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(234, 179, 8, 0.8), transparent);
+    animation: speedLine 0.5s ease-out;
+  }
+}
