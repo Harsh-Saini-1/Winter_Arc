@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Brain, Play, X, Sparkles, Wind, Heart } from "lucide-react"
+import { Brain, Play, X, Wind, Heart } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 
 export function StressReliefCard() {
@@ -58,177 +58,82 @@ export function StressReliefCard() {
     setCount(4)
   }
 
-  const getPhaseColor = () => {
-    switch (phase) {
-      case "inhale":
-        return "from-yellow-400 via-yellow-500 to-amber-500"
-      case "hold":
-        return "from-amber-500 via-orange-500 to-yellow-600"
-      case "exhale":
-        return "from-yellow-600 via-amber-600 to-yellow-700"
-    }
-  }
-
-  const getPhaseIcon = () => {
-    switch (phase) {
-      case "inhale":
-        return <Wind className="h-12 w-12 text-yellow-300 anime-float" />
-      case "hold":
-        return <Heart className="h-12 w-12 text-amber-300 animate-pulse" />
-      case "exhale":
-        return <Sparkles className="h-12 w-12 text-yellow-400 anime-sparkle" />
-    }
-  }
-
   const getPhaseText = () => {
     switch (phase) {
       case "inhale":
-        return "BREATHE IN"
+        return "Breathe In"
       case "hold":
-        return "HOLD"
+        return "Hold"
       case "exhale":
-        return "BREATHE OUT"
+        return "Breathe Out"
     }
   }
 
-  const circleScale = phase === "inhale" ? "scale-150" : phase === "hold" ? "scale-125" : "scale-75"
-
   return (
     <>
-      <Card className="border-yellow-500/30 bg-gradient-to-br from-black via-yellow-950/30 to-black backdrop-blur shadow-2xl overflow-hidden relative group hover:border-yellow-400/50 transition-all duration-500 flex flex-col aspect-square">
-        <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 via-transparent to-amber-500/5 animate-pulse" />
-
-        {/* Anime speed lines */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
-          {[...Array(8)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent"
-              style={{
-                top: `${10 + i * 12}%`,
-                left: "-100%",
-                right: "100%",
-                animation: `speedLine ${1 + Math.random()}s ease-in-out infinite`,
-                animationDelay: `${i * 0.2}s`,
-              }}
-            />
-          ))}
-        </div>
-
-        <CardHeader className="relative z-10 pb-2">
-          <CardTitle className="text-white flex items-center gap-2 text-xs font-bold">
-            <div className="p-2 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-lg shadow-lg anime-pulse">
-              <Brain className="h-4 w-4 text-black" />
-            </div>
-            <span className="bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-400 bg-clip-text text-transparent uppercase tracking-wide">
-              Stress Relief
-            </span>
-          </CardTitle>
+      <Card className="border-slate-700/50 bg-gradient-to-br from-slate-900 to-slate-800 backdrop-blur shadow-sm overflow-hidden flex flex-col aspect-square">
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+          <CardTitle className="text-sm font-semibold text-slate-300 uppercase">Stress Relief</CardTitle>
+          <Brain className="h-4 w-4 text-blue-400" />
         </CardHeader>
 
-        <CardContent className="space-y-4 relative z-10 flex-1 flex flex-col justify-between pb-4">
+        <CardContent className="space-y-3 flex-1 flex flex-col justify-between pb-3">
           <div className="flex-1 flex items-center justify-center">
-            <div className="text-center space-y-2">
-              <div className="relative inline-block">
-                <div className="absolute inset-0 bg-yellow-400 rounded-full blur-2xl opacity-30 animate-pulse" />
-                <Brain className="h-12 w-12 text-yellow-400 relative z-10 anime-float" />
-              </div>
-              <p className="text-yellow-300 text-xs font-medium">Take a moment to breathe</p>
-            </div>
+            <Brain className="h-10 w-10 text-blue-400" />
           </div>
 
           <Button
             onClick={handleStart}
-            className="w-full h-10 text-xs font-bold shadow-lg transition-all duration-300 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-black anime-glow"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white text-xs transition-colors"
           >
             <Play className="h-3 w-3 mr-1" />
-            START BREATHING
+            Start
           </Button>
         </CardContent>
       </Card>
 
       {isFullscreen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center anime-fade-in">
-          {/* Blurred backdrop */}
-          <div className="absolute inset-0 bg-black/80 backdrop-blur-xl" />
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
 
-          {/* Anime particles */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {[...Array(30)].map((_, i) => (
-              <div
-                key={i}
-                className="absolute w-2 h-2 bg-yellow-400/50 rounded-full anime-particle"
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                  animationDelay: `${Math.random() * 3}s`,
-                }}
-              />
-            ))}
-          </div>
-
-          {/* Main content */}
-          <div className="relative z-10 w-full max-w-2xl mx-4 anime-scale-in">
-            <div className="bg-gradient-to-br from-black via-yellow-950/50 to-black border-2 border-yellow-500/30 rounded-3xl p-8 shadow-2xl">
-              {/* Close button */}
+          <div className="relative z-10 w-full max-w-xl mx-4">
+            <Card className="border-slate-700/50 bg-gradient-to-br from-slate-900 to-slate-800">
               <button
                 onClick={handleClose}
-                className="absolute top-4 right-4 p-2 bg-red-500/20 hover:bg-red-500/30 border border-red-500/30 rounded-xl transition-all duration-300 group"
+                className="absolute top-4 right-4 p-2 bg-slate-700 hover:bg-slate-600 rounded-lg transition-colors z-20"
               >
-                <X className="h-6 w-6 text-red-400 group-hover:text-red-300" />
+                <X className="h-5 w-5 text-slate-100" />
               </button>
 
-              {/* Breathing circle */}
-              <div className="flex items-center justify-center py-12">
-                <div className="relative w-80 h-80 flex items-center justify-center">
-                  <div
-                    className={`absolute inset-0 rounded-full bg-gradient-to-br ${getPhaseColor()} opacity-20 blur-3xl transition-all duration-1000 ${isActive ? circleScale : ""}`}
-                  />
-
-                  <div
-                    className={`absolute w-64 h-64 rounded-full bg-gradient-to-br ${getPhaseColor()} shadow-2xl transition-all duration-1000 ease-in-out ${isActive ? circleScale : "scale-100"} flex items-center justify-center anime-glow`}
-                  >
-                    <div className="absolute inset-8 rounded-full bg-black/40 backdrop-blur-sm flex flex-col items-center justify-center gap-4">
-                      {getPhaseIcon()}
-                      <div className="text-center">
-                        <p className="text-yellow-200 text-sm font-bold tracking-widest mb-2">{getPhaseText()}</p>
-                        <p className="text-7xl font-black text-white anime-pulse">{count}</p>
-                      </div>
+              <CardContent className="p-8 flex flex-col items-center justify-center min-h-96">
+                <div className="flex items-center justify-center py-8">
+                  <div className="text-center">
+                    <div className="flex justify-center mb-6">
+                      {phase === "inhale" && <Wind className="h-12 w-12 text-blue-400" />}
+                      {phase === "hold" && <Heart className="h-12 w-12 text-slate-300" />}
+                      {phase === "exhale" && <Wind className="h-12 w-12 text-blue-300" />}
                     </div>
+                    <p className="text-slate-400 text-sm font-medium mb-4 uppercase">{getPhaseText()}</p>
+                    <p className="text-6xl font-bold text-white">{count}</p>
                   </div>
+                </div>
 
-                  {/* Anime impact rings */}
-                  {isActive && (
-                    <>
-                      <div className="absolute inset-0 rounded-full border-4 border-yellow-400/30 animate-ping" />
-                      <div className="absolute inset-8 rounded-full border-2 border-amber-400/20 animate-ping delay-100" />
-                    </>
-                  )}
+                <div className="grid grid-cols-3 gap-3 w-full mt-6">
+                  <div className="bg-slate-800 border border-slate-700 rounded-lg p-3 text-center">
+                    <p className="text-slate-500 text-xs font-medium uppercase">Cycles</p>
+                    <p className="text-white font-bold text-lg mt-1">{cycles}</p>
+                  </div>
+                  <div className="bg-slate-800 border border-slate-700 rounded-lg p-3 text-center">
+                    <p className="text-slate-500 text-xs font-medium uppercase">Phase</p>
+                    <p className="text-white font-bold text-sm mt-1 capitalize">{phase}</p>
+                  </div>
+                  <div className="bg-slate-800 border border-slate-700 rounded-lg p-3 text-center">
+                    <p className="text-slate-500 text-xs font-medium uppercase">Time</p>
+                    <p className="text-white font-bold text-lg mt-1">{Math.floor((cycles * 14) / 60)}'</p>
+                  </div>
                 </div>
-              </div>
-
-              {/* Stats */}
-              <div className="grid grid-cols-3 gap-4 mt-8">
-                <div className="bg-gradient-to-br from-yellow-500/10 to-amber-500/10 border border-yellow-500/20 rounded-xl p-4 text-center anime-slide-up">
-                  <p className="text-yellow-600 text-xs font-semibold uppercase tracking-wide">Cycles</p>
-                  <p className="text-3xl font-black text-yellow-400 mt-2">{cycles}</p>
-                </div>
-                <div
-                  className="bg-gradient-to-br from-yellow-500/10 to-amber-500/10 border border-yellow-500/20 rounded-xl p-4 text-center anime-slide-up"
-                  style={{ animationDelay: "0.1s" }}
-                >
-                  <p className="text-yellow-600 text-xs font-semibold uppercase tracking-wide">Phase</p>
-                  <p className="text-lg font-black text-yellow-400 mt-2 uppercase">{phase}</p>
-                </div>
-                <div
-                  className="bg-gradient-to-br from-yellow-500/10 to-amber-500/10 border border-yellow-500/20 rounded-xl p-4 text-center anime-slide-up"
-                  style={{ animationDelay: "0.2s" }}
-                >
-                  <p className="text-yellow-600 text-xs font-semibold uppercase tracking-wide">Time</p>
-                  <p className="text-3xl font-black text-yellow-400 mt-2">{Math.floor((cycles * 14) / 60)}'</p>
-                </div>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       )}

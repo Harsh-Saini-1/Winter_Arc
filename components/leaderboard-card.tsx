@@ -74,8 +74,8 @@ export function LeaderboardCard({ currentUserId }: LeaderboardCardProps) {
       case 1:
         return (
           <div className="relative">
-            <div className="absolute inset-0 bg-yellow-400 rounded-full blur-lg opacity-50 animate-pulse" />
-            <Crown className="h-7 w-7 text-yellow-400 relative z-10 drop-shadow-lg" />
+            <div className="absolute inset-0 bg-blue-500 rounded-full blur-lg opacity-50 animate-pulse" />
+            <Crown className="h-7 w-7 text-blue-500 relative z-10 drop-shadow-lg" />
           </div>
         )
       case 2:
@@ -88,14 +88,14 @@ export function LeaderboardCard({ currentUserId }: LeaderboardCardProps) {
       case 3:
         return (
           <div className="relative">
-            <div className="absolute inset-0 bg-amber-600 rounded-full blur-md opacity-30" />
-            <Award className="h-6 w-6 text-amber-600 relative z-10" />
+            <div className="absolute inset-0 bg-blue-600 rounded-full blur-md opacity-30" />
+            <Award className="h-6 w-6 text-blue-600 relative z-10" />
           </div>
         )
       default:
         return (
-          <div className="w-8 h-8 rounded-full bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center">
-            <span className="text-yellow-400 font-bold text-sm">{rank}</span>
+          <div className="w-8 h-8 rounded-full bg-blue-500/10 border border-blue-500/30 flex items-center justify-center">
+            <span className="text-blue-400 font-bold text-sm">{rank}</span>
           </div>
         )
     }
@@ -111,7 +111,7 @@ export function LeaderboardCard({ currentUserId }: LeaderboardCardProps) {
 
   if (loading) {
     return (
-      <Card className="border-blue-500/20 bg-slate-900/50 backdrop-blur">
+      <Card className="border-slate-700/20 bg-slate-900/50 backdrop-blur">
         <CardContent className="p-6">
           <p className="text-slate-400">Loading leaderboard...</p>
         </CardContent>
@@ -120,23 +120,21 @@ export function LeaderboardCard({ currentUserId }: LeaderboardCardProps) {
   }
 
   return (
-    <Card className="border-yellow-500/30 bg-gradient-to-br from-black via-yellow-950/30 to-black backdrop-blur shadow-2xl hover:border-yellow-400/50 transition-all duration-500">
-      <CardHeader>
-        <CardTitle className="text-white flex items-center gap-3 text-xl font-bold">
-          <div className="p-2 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-lg shadow-lg">
-            <Trophy className="h-5 w-5 text-black" />
+    <Card className="border-slate-700/50 bg-gradient-to-br from-slate-900 to-slate-800 backdrop-blur shadow-sm">
+      <CardHeader className="pb-3">
+        <CardTitle className="text-slate-200 flex items-center gap-3 text-lg font-semibold">
+          <div className="p-2 bg-blue-500/20 rounded-lg">
+            <Trophy className="h-5 w-5 text-blue-400" />
           </div>
-          <span className="bg-gradient-to-r from-yellow-300 to-amber-400 bg-clip-text text-transparent">
-            LEADERBOARD
-          </span>
+          <span className="text-slate-100 uppercase tracking-wide">Leaderboard</span>
         </CardTitle>
         {currentUserRank && (
-          <p className="text-sm text-yellow-600 font-medium">
-            Your rank: <span className="text-yellow-400 font-bold">#{currentUserRank}</span>
+          <p className="text-xs text-slate-400 font-medium mt-2">
+            Your rank: <span className="text-blue-400 font-semibold">#{currentUserRank}</span>
           </p>
         )}
       </CardHeader>
-      <CardContent className="space-y-3 max-h-[600px] overflow-y-auto custom-scrollbar">
+      <CardContent className="space-y-2 max-h-[600px] overflow-y-auto custom-scrollbar">
         {leaderboard.map((entry, index) => {
           const rank = index + 1
           const isCurrentUser = entry.id === currentUserId
@@ -144,32 +142,32 @@ export function LeaderboardCard({ currentUserId }: LeaderboardCardProps) {
           return (
             <div
               key={entry.id}
-              className={`flex items-center gap-3 p-3 rounded-xl border transition-all duration-300 hover:scale-[1.02] ${
+              className={`flex items-center gap-3 p-3 rounded-lg border transition-all text-sm ${
                 isCurrentUser
-                  ? "bg-gradient-to-r from-yellow-500/20 to-amber-500/20 border-yellow-500/50 shadow-lg shadow-yellow-500/20"
+                  ? "bg-blue-500/10 border-blue-500/30 shadow-sm"
                   : rank <= 3
-                    ? "bg-gradient-to-r from-yellow-950/50 to-black border-yellow-500/20"
-                    : "bg-black/50 border-yellow-500/10 hover:border-yellow-500/30"
+                    ? "bg-slate-800/50 border-slate-700"
+                    : "bg-slate-900/50 border-slate-800 hover:border-slate-700"
               }`}
             >
-              <div className="flex items-center justify-center w-12">{getRankIcon(rank)}</div>
-              <Avatar className="h-11 w-11 border-2 border-yellow-500/30 ring-2 ring-yellow-500/10 shadow-lg">
+              <div className="flex items-center justify-center w-8">{getRankIcon(rank)}</div>
+              <Avatar className="h-9 w-9 border border-slate-700 ring-1 ring-slate-600/50">
                 <AvatarImage src={entry.avatar_url || ""} alt={entry.display_name} />
-                <AvatarFallback className="bg-gradient-to-br from-yellow-600 to-amber-700 text-black text-sm font-bold">
+                <AvatarFallback className="bg-blue-600/20 text-blue-300 text-xs font-semibold">
                   {getInitials(entry.display_name)}
                 </AvatarFallback>
               </Avatar>
               <div className="flex-1 min-w-0">
-                <p className={`font-bold truncate ${isCurrentUser ? "text-yellow-300" : "text-white"}`}>
+                <p className={`font-medium truncate text-sm ${isCurrentUser ? "text-blue-300" : "text-slate-200"}`}>
                   {entry.display_name}
-                  {isCurrentUser && <span className="text-xs ml-2 text-yellow-500">(You)</span>}
+                  {isCurrentUser && <span className="text-xs ml-2 text-blue-400">(You)</span>}
                 </p>
-                <div className="flex items-center gap-3 text-xs mt-1">
-                  <div className="flex items-center gap-1 text-yellow-400 font-bold">
+                <div className="flex items-center gap-2 text-xs mt-1">
+                  <div className="flex items-center gap-1 text-blue-400 font-semibold">
                     <Coins className="h-3 w-3" />
                     <span>{entry.total_coins}</span>
                   </div>
-                  <div className="flex items-center gap-1 text-amber-400 font-semibold">
+                  <div className="flex items-center gap-1 text-slate-400 font-medium">
                     <Flame className="h-3 w-3" />
                     <span>{entry.current_streak}</span>
                   </div>

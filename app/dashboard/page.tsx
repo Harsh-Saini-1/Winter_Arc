@@ -40,37 +40,13 @@ export default async function DashboardPage() {
   console.log("[v0] Dashboard - Daily completed:", dailyProgress?.questions_completed || 0)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-amber-950/20 to-black relative overflow-hidden">
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(234,179,8,0.1),transparent_50%)]" />
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-yellow-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-amber-600/10 rounded-full blur-3xl animate-pulse delay-1000" />
-      </div>
-
-      {/* Anime floating particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(30)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-yellow-400/50 rounded-full anime-particle"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 4}s`,
-            }}
-          />
-        ))}
-      </div>
-
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 relative overflow-hidden">
       <div className="max-w-7xl mx-auto space-y-6 p-6 relative z-10">
-        <div className="epic-slide-in">
+        <div>
           <ProfileCard profile={profile} user={user} />
         </div>
 
-        <div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 epic-fade-in"
-          style={{ animationDelay: "0.2s" }}
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <StatsCards
             totalCompleted={completedCount || 0}
             dailyCompleted={dailyProgress?.questions_completed || 0}
@@ -79,7 +55,7 @@ export default async function DashboardPage() {
           <StressReliefCard />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 epic-fade-in" style={{ animationDelay: "0.4s" }}>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2">
             <QuestionsCard userId={user.id} dailyCompleted={dailyProgress?.questions_completed || 0} />
           </div>

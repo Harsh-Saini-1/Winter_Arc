@@ -285,7 +285,7 @@ export function QuestionsCard({ userId, dailyCompleted: initialDailyCompleted }:
 
   if (loading) {
     return (
-      <Card className="border-blue-500/20 bg-slate-900/50 backdrop-blur">
+      <Card className="border-slate-700/50 bg-gradient-to-br from-slate-900 to-slate-800 backdrop-blur">
         <CardContent className="p-6">
           <p className="text-slate-400">Loading questions...</p>
         </CardContent>
@@ -294,26 +294,21 @@ export function QuestionsCard({ userId, dailyCompleted: initialDailyCompleted }:
   }
 
   return (
-    <Card className="border-yellow-500/30 bg-gradient-to-br from-black via-yellow-950/30 to-black backdrop-blur shadow-2xl hover:border-yellow-400/50 transition-all duration-500 overflow-hidden relative group">
-      {/* Animated background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 via-transparent to-amber-500/5 animate-pulse" />
-
-      <CardHeader className="relative z-10">
-        <CardTitle className="text-white flex items-center gap-3 text-2xl font-bold">
-          <div className="p-2 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-xl shadow-lg">
-            <Sparkles className="h-6 w-6 text-black" />
+    <Card className="border-slate-700/50 bg-gradient-to-br from-slate-900 to-slate-800 backdrop-blur shadow-sm overflow-hidden">
+      <CardHeader className="pb-3">
+        <CardTitle className="text-slate-200 flex items-center gap-3 text-lg font-semibold">
+          <div className="p-2 bg-blue-500/20 rounded-lg">
+            <Sparkles className="h-5 w-5 text-blue-400" />
           </div>
-          <span className="bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-400 bg-clip-text text-transparent">
-            DAILY QUESTIONS
-          </span>
+          <span className="text-slate-100 uppercase tracking-wide">Daily Questions</span>
         </CardTitle>
         <Tabs value={selectedTopic} onValueChange={setSelectedTopic} className="w-full mt-4">
-          <TabsList className="bg-black/50 border border-yellow-500/20 flex-wrap h-auto gap-2 p-2">
+          <TabsList className="bg-slate-800/50 border border-slate-700 flex-wrap h-auto gap-2 p-2">
             {topics.map((topic) => (
               <TabsTrigger
                 key={topic}
                 value={topic}
-                className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-yellow-500 data-[state=active]:to-amber-600 data-[state=active]:text-black data-[state=active]:font-bold text-yellow-400 hover:text-yellow-300 transition-all duration-300 rounded-lg px-4 py-2"
+                className="data-[state=active]:bg-blue-600 data-[state=active]:text-white data-[state=active]:font-semibold text-slate-400 hover:text-slate-200 transition-colors rounded-md px-3 py-1 text-sm"
               >
                 {topic.charAt(0).toUpperCase() + topic.slice(1)}
               </TabsTrigger>
@@ -321,15 +316,15 @@ export function QuestionsCard({ userId, dailyCompleted: initialDailyCompleted }:
           </TabsList>
         </Tabs>
       </CardHeader>
-      <CardContent className="max-h-[600px] overflow-y-auto custom-scrollbar relative z-10">
-        <div className="space-y-6">
+      <CardContent className="max-h-[600px] overflow-y-auto custom-scrollbar">
+        <div className="space-y-4">
           {Object.entries(questionsByDay).map(([day, dayQuestions]) => (
             <div key={day} className="space-y-3">
-              <h3 className="text-lg font-black text-yellow-300 mb-3 flex items-center gap-3">
-                <div className="bg-gradient-to-r from-yellow-500 to-amber-600 px-4 py-2 rounded-xl shadow-lg">
-                  <span className="text-black font-black">DAY {day}</span>
+              <h3 className="text-sm font-semibold text-slate-300 mb-3 flex items-center gap-3">
+                <div className="bg-slate-700 px-3 py-1 rounded-md">
+                  <span className="text-slate-200 font-semibold">DAY {day}</span>
                 </div>
-                <div className="h-px flex-1 bg-gradient-to-r from-yellow-500/50 to-transparent" />
+                <div className="h-px flex-1 bg-slate-700" />
               </h3>
               {dayQuestions.map((question) => {
                 const isCompleted = completedQuestions.has(question.id)
@@ -339,12 +334,12 @@ export function QuestionsCard({ userId, dailyCompleted: initialDailyCompleted }:
                 return (
                   <div
                     key={question.id}
-                    className={`flex items-center gap-4 p-4 rounded-xl border-2 transition-all duration-300 hover:scale-[1.02] ${
+                    className={`flex items-center gap-4 p-3 rounded-lg border transition-all ${
                       isCompleted
-                        ? "bg-gradient-to-r from-yellow-500/20 via-green-500/20 to-yellow-500/20 border-yellow-500/50 shadow-xl shadow-yellow-500/10"
+                        ? "bg-blue-500/10 border-blue-500/30 shadow-sm"
                         : isDisabled
-                          ? "bg-black/50 border-yellow-700/30 opacity-50 cursor-not-allowed"
-                          : "bg-gradient-to-r from-black/80 to-yellow-950/50 border-yellow-500/30 hover:border-yellow-400/60 hover:shadow-lg hover:shadow-yellow-500/10"
+                          ? "bg-slate-900/50 border-slate-700 opacity-50 cursor-not-allowed"
+                          : "bg-slate-800/50 border-slate-700 hover:border-slate-600"
                     }`}
                   >
                     <div className="flex-shrink-0">
@@ -352,7 +347,7 @@ export function QuestionsCard({ userId, dailyCompleted: initialDailyCompleted }:
                         checked={isCompleted}
                         onCheckedChange={(checked) => handleQuestionComplete(question, checked as boolean)}
                         disabled={isDisabled}
-                        className="border-2 border-yellow-500 data-[state=checked]:bg-gradient-to-br data-[state=checked]:from-yellow-500 data-[state=checked]:to-amber-600 data-[state=checked]:border-yellow-400 w-6 h-6 rounded-lg shadow-lg"
+                        className="border-2 border-blue-500 data-[state=checked]:bg-blue-500 data-[state=checked]:border-blue-400 w-5 h-5 rounded"
                       />
                     </div>
                     <div className="flex-1 min-w-0">
@@ -360,28 +355,28 @@ export function QuestionsCard({ userId, dailyCompleted: initialDailyCompleted }:
                         href={question.question_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-yellow-100 hover:text-yellow-300 transition-colors flex items-center gap-2 group mb-2"
+                        className="text-slate-200 hover:text-blue-400 transition-colors flex items-center gap-2 group mb-2"
                       >
-                        <span className="truncate font-bold text-base">{question.title}</span>
-                        <ExternalLink className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 text-yellow-400" />
+                        <span className="truncate font-medium text-sm">{question.title}</span>
+                        <ExternalLink className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 text-blue-400" />
                       </a>
                       <div className="flex items-center gap-2 flex-wrap">
                         <Badge
                           variant="outline"
-                          className={`${getDifficultyColor(question.difficulty)} font-bold uppercase text-xs px-3 py-1`}
+                          className={`${getDifficultyColor(question.difficulty)} font-semibold uppercase text-xs px-2 py-1`}
                         >
                           {question.difficulty}
                         </Badge>
                         <Badge
                           variant="outline"
-                          className={`${getConceptualDifficultyColor(question.conceptual_difficulty)} font-semibold text-xs px-3 py-1`}
+                          className={`${getConceptualDifficultyColor(question.conceptual_difficulty)} font-semibold text-xs px-2 py-1`}
                         >
                           <Brain className="h-3 w-3 mr-1" />
                           {question.conceptual_difficulty}
                         </Badge>
-                        <div className="flex items-center gap-1.5 bg-gradient-to-r from-yellow-500/20 to-amber-500/20 border border-yellow-500/30 rounded-lg px-3 py-1 shadow-md">
-                          <Coins className="h-4 w-4 text-yellow-400" />
-                          <span className="text-yellow-300 font-bold text-sm">{question.coins}</span>
+                        <div className="flex items-center gap-1 bg-blue-500/10 border border-blue-500/30 rounded px-2 py-1 shadow-sm">
+                          <Coins className="h-3 w-3 text-blue-400" />
+                          <span className="text-blue-300 font-semibold text-xs">{question.coins}</span>
                         </div>
                       </div>
                     </div>
@@ -390,19 +385,19 @@ export function QuestionsCard({ userId, dailyCompleted: initialDailyCompleted }:
                         <Button
                           variant="ghost"
                           size="sm"
-                          className={`flex-shrink-0 ${hasNote ? "bg-yellow-500/20 text-yellow-300 border border-yellow-500/30" : "text-yellow-600 hover:bg-yellow-500/10"} hover:text-yellow-300 transition-all duration-300 rounded-lg p-2`}
+                          className={`flex-shrink-0 ${hasNote ? "bg-blue-500/20 text-blue-300 border border-blue-500/30" : "text-slate-500 hover:bg-slate-700/50"} hover:text-blue-300 transition-all rounded-lg p-2 h-8 w-8`}
                           onClick={() => {
                             setSelectedQuestionId(question.id)
                             setCurrentNote(notes[question.id] || "")
                           }}
                         >
-                          <StickyNote className="h-5 w-5" />
+                          <StickyNote className="h-4 w-4" />
                         </Button>
                       </DialogTrigger>
-                      <DialogContent className="bg-gradient-to-br from-black via-yellow-950 to-black border-2 border-yellow-500/30">
+                      <DialogContent className="bg-gradient-to-br from-slate-900 to-slate-800 border-slate-700">
                         <DialogHeader>
-                          <DialogTitle className="text-yellow-100 text-xl font-bold flex items-center gap-2">
-                            <StickyNote className="h-5 w-5 text-yellow-400" />
+                          <DialogTitle className="text-slate-200 text-lg font-semibold flex items-center gap-2">
+                            <StickyNote className="h-5 w-5 text-blue-400" />
                             Notes for {question.title}
                           </DialogTitle>
                         </DialogHeader>
@@ -411,12 +406,12 @@ export function QuestionsCard({ userId, dailyCompleted: initialDailyCompleted }:
                             value={currentNote}
                             onChange={(e) => setCurrentNote(e.target.value)}
                             placeholder="Write your notes here..."
-                            className="bg-black/50 border-2 border-yellow-500/30 text-yellow-100 min-h-[200px] focus:border-yellow-400/50 rounded-lg"
+                            className="bg-slate-800 border-slate-700 text-slate-200 min-h-[200px] focus:border-blue-500 rounded-lg"
                           />
                           <Button
                             onClick={() => handleSaveNote(question.id)}
                             disabled={savingNote}
-                            className="w-full bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-black font-bold text-base py-6 rounded-lg shadow-lg"
+                            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-colors"
                           >
                             {savingNote ? "Saving..." : "Save Note"}
                           </Button>
